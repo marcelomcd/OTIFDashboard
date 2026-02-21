@@ -1,0 +1,36 @@
+model Model
+	culture: pt-BR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: pt-BR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["MCP-PBIModeling","DevMode"]
+
+annotation PBI_QueryOrder = ["DimCanalVenda", "DimEmitentes", "Pedidos_OTIF", "Itens_OTIF"]
+
+ref table _Medidas
+ref table Pedidos_OTIF
+ref table DateTableTemplate_2300f85d-8999-4e99-b9e4-c9d9617863ae
+ref table LocalDateTable_808954f5-74b3-4a47-8390-cd46a16ab124
+ref table LocalDateTable_a4c25065-428d-4fc4-b187-68790e8b5d91
+ref table LocalDateTable_7a2b4802-5946-43f6-91bd-12cecc8c5710
+ref table LocalDateTable_f2cbd382-18d0-4ffb-bc0a-70ac0ba56a25
+ref table LocalDateTable_b81ad765-844a-4951-bc33-7bee8476d5cf
+ref table LocalDateTable_24960842-c35f-4f13-bf85-3d8869d77aff
+ref table LocalDateTable_17fbf319-5b46-4ab5-b911-f34244d185fe
+ref table LocalDateTable_8f4e7dbe-bb79-4064-9bb0-463e8ab97351
+ref table LocalDateTable_7d06e464-8699-41f4-bf41-a776db2da4f2
+ref table LocalDateTable_8c6aa999-01a2-4b86-b526-d32b7b69b4b1
+ref table DimCalendario
+ref table DimCiclos
+ref table DimRegiao
+ref table DimCanalVenda
+ref table DimEmitentes
+ref table Itens_OTIF
+
+ref cultureInfo pt-BR
+

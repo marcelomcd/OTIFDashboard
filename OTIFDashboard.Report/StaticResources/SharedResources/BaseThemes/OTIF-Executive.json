@@ -1,0 +1,61 @@
+{
+  "name": "OTIF Executive",
+  "background": "#F8F9FA",
+  "foreground": "#212529",
+  "foregroundNeutralSecondary": "#6C757D",
+  "foregroundNeutralTertiary": "#ADB5BD",
+  "backgroundLight": "#E9ECEF",
+  "backgroundNeutral": "#DEE2E6",
+  "tableAccent": "#0066CC",
+  "good": "#28A745",
+  "neutral": "#FFC107",
+  "bad": "#DC3545",
+  "maximum": "#0066CC",
+  "center": "#FFC107",
+  "minimum": "#E9ECEF",
+  "null": "#6C757D",
+  "hyperlink": "#0066CC",
+  "visitedHyperlink": "#0066CC",
+  "dataColors": [
+    "#0066CC",
+    "#28A745",
+    "#FFC107",
+    "#DC3545",
+    "#6C757D"
+  ],
+  "textClasses": {
+    "callout": {
+      "fontSize": 24,
+      "fontFace": "Segoe UI",
+      "color": "#212529"
+    },
+    "title": {
+      "fontSize": 12,
+      "fontFace": "Segoe UI Semibold",
+      "color": "#212529"
+    },
+    "header": {
+      "fontSize": 12,
+      "fontFace": "Segoe UI Semibold",
+      "color": "#212529"
+    },
+    "label": {
+      "fontSize": 10,
+      "fontFace": "Segoe UI",
+      "color": "#212529"
+    }
+  },
+  "visualStyles": {
+    "*": {
+      "*": {
+        "border": [
+          {
+            "show": true,
+            "color": "#DEE2E6",
+            "radius": 4
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,62 @@
+relationship 85be3b10-eadc-4911-8b13-442e4cd2447b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Pedidos_OTIF.'Dt.EmissÆo'
+	toColumn: LocalDateTable_808954f5-74b3-4a47-8390-cd46a16ab124.Date
+
+relationship 57930ad0-9270-4994-b1ed-49a434643fc7
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Pedidos_OTIF.'Prazo Comercial'
+	toColumn: LocalDateTable_a4c25065-428d-4fc4-b187-68790e8b5d91.Date
+
+relationship 23d74311-edb0-4297-acd5-39b747716369
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Pedidos_OTIF.'Dt.Real Comercial'
+	toColumn: LocalDateTable_7a2b4802-5946-43f6-91bd-12cecc8c5710.Date
+
+relationship 240668d4-dd33-46a3-afca-b5dd5ae4caa2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Pedidos_OTIF.'Prazo Estoque'
+	toColumn: LocalDateTable_f2cbd382-18d0-4ffb-bc0a-70ac0ba56a25.Date
+
+relationship 66f1dc69-24a5-4a37-bbee-4fb34571f126
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Pedidos_OTIF.'Dt.Real Estoque'
+	toColumn: LocalDateTable_b81ad765-844a-4951-bc33-7bee8476d5cf.Date
+
+relationship 37f1a8e7-4f9d-4e0b-b36c-1b7ed263308a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Pedidos_OTIF.'Prazo Faturamento'
+	toColumn: LocalDateTable_24960842-c35f-4f13-bf85-3d8869d77aff.Date
+
+relationship 256a3314-0f4a-4c93-af66-e7d9a82fbbab
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Pedidos_OTIF.'Dt.Fatur Emis Nota'
+	toColumn: LocalDateTable_17fbf319-5b46-4ab5-b911-f34244d185fe.Date
+
+relationship 92b2c444-dc3f-4da6-8bd4-6bc8b61e99af
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Pedidos_OTIF.'Prazo Transporte'
+	toColumn: LocalDateTable_8f4e7dbe-bb79-4064-9bb0-463e8ab97351.Date
+
+relationship 941f7c63-374b-4068-a2b3-22734b169bcb
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Pedidos_OTIF.'Dt Prev Entrega'
+	toColumn: LocalDateTable_7d06e464-8699-41f4-bf41-a776db2da4f2.Date
+
+relationship 944bf48f-af2d-4f07-be6b-01bd74be5a97
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Pedidos_OTIF.'Dt Entr Cli'
+	toColumn: LocalDateTable_8c6aa999-01a2-4b86-b526-d32b7b69b4b1.Date
+
+relationship 'Pedidos_OTIF_Dt.EmissÆo_DimCalendario_Date'
+	fromColumn: Pedidos_OTIF.'Dt.EmissÆo'
+	toColumn: DimCalendario.Date
+
+relationship Pedidos_OTIF_Regiao_DimRegiao
+	fromColumn: Pedidos_OTIF.Regiao
+	toColumn: DimRegiao.Regiao
+
+relationship Itens_OTIF_Pedido_Pedidos_OTIF
+	fromColumn: Itens_OTIF.Pedido
+	toColumn: Pedidos_OTIF.Pedido
+

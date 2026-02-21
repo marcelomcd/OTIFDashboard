@@ -1,0 +1,36 @@
+/// Itens dos pedidos OTIF - detalhamento por produto
+table Itens_OTIF
+	lineageTag: b013dc89-b023-4bf2-892b-dc8db513f017
+
+	column Pedido
+		dataType: string
+		lineageTag: 9c9f57db-9922-407a-90d2-8bc3aa2d1c66
+		summarizeBy: none
+		sourceColumn: Pedido
+
+	column Descricao
+		dataType: string
+		lineageTag: 79d7d4bd-db0e-495f-95c0-3c14092421a6
+		summarizeBy: none
+		sourceColumn: Descricao
+
+	column 'It.Codigo'
+		dataType: string
+		lineageTag: febd055e-972a-4ada-9037-2977ce135530
+		summarizeBy: none
+		sourceColumn: It.Codigo
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Itens_OTIF = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents("C:\Users\marce\Desktop\OTIFDashboard\otif-itens-20022026-101911.csv"),[Delimiter=";", Columns=2, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				    #"Coluna Pedido Adicionada" = Table.AddColumn(#"Cabeçalhos Promovidos", "Pedido", each null, type text),
+				    #"Colunas Reordenadas" = Table.SelectColumns(#"Coluna Pedido Adicionada", {"Pedido", "It.Codigo", "Descricao"}),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Colunas Reordenadas",{{"Pedido", type text}, {"It.Codigo", type text}, {"Descricao", type text}})
+				in
+				    #"Tipo Alterado"
+

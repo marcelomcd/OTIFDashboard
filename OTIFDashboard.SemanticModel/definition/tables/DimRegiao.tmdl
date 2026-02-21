@@ -1,0 +1,60 @@
+/// Dimensão de regiões (UMs) extraídas dos clientes
+table DimRegiao
+	lineageTag: ab7560b3-099c-4334-818e-b84df9cc69cc
+
+	column Regiao
+		lineageTag: 80206ee4-553b-4a2d-89fc-9fd1644594ec
+		isNameInferred
+		sourceColumn: Pedidos_OTIF[Regiao]
+
+	/// Estado (UF) para mapa do Brasil - mapeamento por letra inicial da Região (ajustar conforme necessidade)
+	column Estado =
+			VAR Inicial = UPPER(LEFT(DimRegiao[Regiao], 1))
+			RETURN
+			    SWITCH(
+			        Inicial,
+			        "A", "AM",
+			        "B", "BA",
+			        "C", "CE",
+			        "D", "DF",
+			        "E", "ES",
+			        "F", "GO",
+			        "G", "GO",
+			        "H", "MG",
+			        "I", "PE",
+			        "J", "RJ",
+			        "K", "SP",
+			        "L", "SC",
+			        "M", "MG",
+			        "N", "PE",
+			        "O", "GO",
+			        "P", "PR",
+			        "Q", "RS",
+			        "R", "RS",
+			        "S", "SP",
+			        "T", "TO",
+			        "U", "MG",
+			        "V", "SP",
+			        "W", "BA",
+			        "X", "PE",
+			        "Y", "RS",
+			        "Z", "SP",
+			        "0", "SP",
+			        "1", "RJ",
+			        "2", "MG",
+			        "3", "RS",
+			        "4", "PR",
+			        "5", "SC",
+			        "6", "BA",
+			        "7", "PE",
+			        "8", "CE",
+			        "9", "GO",
+			        "SP"
+			    )
+		dataType: string
+		lineageTag: a1b2c3d4-estado-uf-mapa-brasil
+
+	partition DimRegiao = calculated
+		mode: import
+		source = DISTINCT(Pedidos_OTIF[Regiao])
+

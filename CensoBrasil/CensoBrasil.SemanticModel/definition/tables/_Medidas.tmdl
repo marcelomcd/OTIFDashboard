@@ -1,0 +1,49 @@
+/// Medidas para o dashboard CENSO BRASIL 2007
+table _Medidas
+	isHidden
+	lineageTag: medidas-censo
+
+	measure 'Total População' = SUM(CensoDados[Populacao])
+		formatString: #,##0
+		displayFolder: KPIs
+		lineageTag: acdd8843-bf6b-4554-975a-1f83c66b6c06
+
+	measure 'Qtd Municípios' = COUNTROWS(CensoDados)
+		formatString: #,##0
+		displayFolder: KPIs
+		lineageTag: 99a9448a-97ba-4a6e-8902-8d88b9252275
+
+	measure 'Média População' = AVERAGE(CensoDados[Populacao])
+		formatString: #,##0
+		displayFolder: KPIs
+		lineageTag: 923e00c1-f954-4b83-8b42-1859d10e82f4
+
+	measure 'Menor População' = MIN(CensoDados[Populacao])
+		formatString: #,##0
+		displayFolder: KPIs
+		lineageTag: 7444133d-473c-4382-96b8-3c24306db313
+
+	measure 'Maior População' = MAX(CensoDados[Populacao])
+		formatString: #,##0
+		displayFolder: KPIs
+		lineageTag: a628572c-fa13-4c2a-ae3e-b047f78c9745
+
+	measure '% População' = DIVIDE(SUM(CensoDados[Populacao]), CALCULATE(SUM(CensoDados[Populacao]), ALL(CensoDados)), 0)
+		formatString: 0.0%
+		displayFolder: KPIs
+		lineageTag: 4b5f6bc2-9af6-448d-b5fe-1ac8b2eb1b58
+
+	measure 'Ranking População' = RANKX(ALL(CensoDados[Municipio]), [Total População], , DESC)
+		formatString: 0
+		displayFolder: Ranking
+		lineageTag: a3dab5e6-c217-4e1d-8554-3ec7dee1925b
+
+	column Medidas
+		lineageTag: 892ab2b8-d948-42a5-8831-bc13a5d3fd55
+		isNameInferred
+		sourceColumn: [Medidas]
+
+	partition Partition = calculated
+		mode: import
+		source = ROW("Medidas", 1)
+

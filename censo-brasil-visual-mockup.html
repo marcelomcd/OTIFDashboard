@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CENSO BRASIL 2007 - Estrutura Visual</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', -apple-system, sans-serif;
+      background: #121821;
+      color: #E6E6E6;
+      min-height: 100vh;
+      padding: 24px;
+    }
+    .dashboard {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+    }
+    .title {
+      font-size: 28px;
+      font-weight: 600;
+      color: #3FA7FF;
+    }
+    .nav-buttons {
+      display: flex;
+      gap: 8px;
+    }
+    .nav-btn {
+      padding: 8px 20px;
+      border-radius: 8px;
+      border: 1px solid #2A3441;
+      background: transparent;
+      color: #E6E6E6;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .nav-btn.active {
+      background: #3FA7FF;
+      border-color: #3FA7FF;
+      color: white;
+    }
+    .filters {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .filter-label {
+      font-size: 11px;
+      color: #9CA3AF;
+    }
+    .filter-input, .filter-select {
+      padding: 8px 12px;
+      background: #2A3441;
+      border: 1px solid #3B4554;
+      border-radius: 6px;
+      color: #E6E6E6;
+      min-width: 140px;
+    }
+
+    /* Main layout - 3 columns */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 280px 1fr 400px;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+    .visual-card {
+      background: #1A2230;
+      border: 1px solid #2A3441;
+      border-radius: 12px;
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    /* Left column - KPIs e textos */
+    .left-column { display: flex; flex-direction: column; gap: 16px; }
+    .kpi-card {
+      background: #1E2A3A;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+    .kpi-value {
+      font-size: 32px;
+      font-weight: 700;
+      color: #E6E6E6;
+      margin-bottom: 4px;
+    }
+    .kpi-label {
+      font-size: 12px;
+      color: #9CA3AF;
+    }
+    .text-box {
+      background: #1E2A3A;
+      border-radius: 12px;
+      padding: 16px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .text-box strong { color: #3FA7FF; }
+
+    /* Middle column - Gráficos de barras */
+    .middle-column { display: flex; flex-direction: column; gap: 20px; }
+    .chart-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: #E6E6E6;
+    }
+    .bar-chart {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .bar-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .bar-label {
+      min-width: 140px;
+      font-size: 13px;
+    }
+    .bar-container {
+      flex: 1;
+      height: 28px;
+      background: #2A3441;
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #3FA7FF, #67C1FF);
+      border-radius: 4px;
+      min-width: 4px;
+    }
+    .bar-value {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 12px;
+      font-weight: 600;
+      color: white;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    }
+
+    /* Right column - Mapa placeholder */
+    .map-container {
+      min-height: 500px;
+      background: #1E2A3A;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #6B7280;
+      font-size: 14px;
+    }
+
+    /* Tabela - Página Detalhes */
+    .table-section {
+      margin-top: 24px;
+      display: none;
+    }
+    .table-section.active { display: block; }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .data-table th, .data-table td {
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 1px solid #2A3441;
+    }
+    .data-table th {
+      color: #9CA3AF;
+      font-weight: 600;
+    }
+    .data-table tr:hover { background: rgba(63, 167, 255, 0.08); }
+    .data-table .total-row { font-weight: 700; background: rgba(63, 167, 255, 0.12); }
+    .two-tables { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <header class="header">
+      <div>
+        <h1 class="title">CENSO BRASIL 2007</h1>
+        <div class="nav-buttons" style="margin-top:12px">
+          <button class="nav-btn active" onclick="showPage('geral')">Geral</button>
+          <button class="nav-btn" onclick="showPage('detalhes')">Detalhes</button>
+        </div>
+      </div>
+      <div class="filters">
+        <div class="filter-group">
+          <label class="filter-label">Município</label>
+          <input type="text" class="filter-input" placeholder="Search">
+        </div>
+        <div class="filter-group">
+          <label class="filter-label">Região</label>
+          <select class="filter-select">
+            <option>Todos</option>
+            <option>Centro-Oeste</option>
+            <option>Nordeste</option>
+            <option>Norte</option>
+            <option>Sudeste</option>
+            <option>Sul</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label class="filter-label">UF</label>
+          <select class="filter-select">
+            <option>Todos</option>
+            <option>SP</option>
+            <option>RJ</option>
+            <option>MG</option>
+          </select>
+        </div>
+      </div>
+    </header>
+
+    <!-- PÁGINA GERAL -->
+    <div id="page-geral" class="page-content">
+      <div class="main-grid">
+        <div class="left-column">
+          <div class="visual-card kpi-card">
+            <div class="kpi-value">5.564</div>
+            <div class="kpi-label">Quantidade de Municípios</div>
+          </div>
+          <div class="visual-card kpi-card">
+            <div class="kpi-value">183.989.711</div>
+            <div class="kpi-label">Total da População</div>
+          </div>
+          <div class="visual-card kpi-card">
+            <div class="kpi-value">33.068</div>
+            <div class="kpi-label">Média População Municipal</div>
+          </div>
+          <div class="visual-card text-box">
+            <strong>São Paulo</strong> * é o município com o maior número de habitantes: <strong>10.886.518</strong>
+          </div>
+          <div class="visual-card text-box">
+            <strong>Borá</strong> é o município com o menor número de habitantes: <strong>804</strong>
+          </div>
+        </div>
+
+        <div class="middle-column">
+          <div class="visual-card">
+            <div class="chart-title">Total da População por Região</div>
+            <div class="bar-chart" id="chart-regiao"></div>
+          </div>
+          <div class="visual-card">
+            <div class="chart-title">Total da População por Estado</div>
+            <div class="bar-chart" id="chart-estado"></div>
+          </div>
+        </div>
+
+        <div class="right-column">
+          <div class="visual-card">
+            <div class="chart-title">Total da População por Estado e Região</div>
+            <div class="map-container">
+              [ Mapa - Área para visual de mapa do Brasil ]
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PÁGINA DETALHES -->
+    <div id="page-detalhes" class="page-content" style="display:none">
+      <div class="two-tables" style="margin-bottom:24px">
+        <div class="visual-card">
+          <div class="chart-title">Resumo por Região</div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Localidade</th>
+                <th>Total População</th>
+                <th>Qtd Municípios</th>
+                <th>Média</th>
+                <th>Menor</th>
+                <th>Maior</th>
+                <th>% População</th>
+              </tr>
+            </thead>
+            <tbody id="table-regiao"></tbody>
+          </table>
+        </div>
+        <div class="visual-card">
+          <div class="chart-title">Ranking de Municípios por População</div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Município</th>
+                <th>Ranking</th>
+                <th>Total População</th>
+              </tr>
+            </thead>
+            <tbody id="table-municipio"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="visual-card">
+        <div class="chart-title">Total da População por Município</div>
+        <div class="bar-chart" id="chart-municipio"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Mock - Regiões
+    const regioes = [
+      { nome: 'Sudeste', pop: 77873342 },
+      { nome: 'Nordeste', pop: 51535782 },
+      { nome: 'Sul', pop: 26733877 },
+      { nome: 'Norte', pop: 14623317 },
+      { nome: 'Centro-Oeste', pop: 13223393 }
+    ];
+    const maxRegiao = Math.max(...regioes.map(r => r.pop));
+
+    // Mock - Estados
+    const estados = [
+      { nome: 'São Paulo', pop: 39827690 },
+      { nome: 'Minas Gerais', pop: 19273533 },
+      { nome: 'Rio de Janeiro', pop: 15420450 },
+      { nome: 'Bahia', pop: 14080670 },
+      { nome: 'Rio Grande do Sul', pop: 10582887 },
+      { nome: 'Paraná', pop: 10284503 }
+    ];
+    const maxEstado = Math.max(...estados.map(e => e.pop));
+
+    // Mock - Municípios
+    const municipios = [
+      { nome: 'São Paulo', pop: 10886518 },
+      { nome: 'Rio de Janeiro', pop: 6093472 },
+      { nome: 'Salvador', pop: 2886698 },
+      { nome: 'Brasília', pop: 2455903 },
+      { nome: 'Fortaleza', pop: 2452185 },
+      { nome: 'Belo Horizonte', pop: 2373224 },
+      { nome: 'Curitiba', pop: 1751907 },
+      { nome: 'Manaus', pop: 1592103 },
+      { nome: 'Recife', pop: 1537704 }
+    ];
+
+    // Mock - Tabela região
+    const tabelaRegiao = [
+      { local: 'Centro-Oeste', pop: 13223393, qtd: 466, media: 28376, menor: 966, maior: 2455903, pct: 7.2 },
+      { local: 'Nordeste', pop: 51535782, qtd: 1794, media: 28743, menor: 804, maior: 3790717, pct: 28.0 },
+      { local: 'Norte', pop: 14623317, qtd: 450, media: 32496, menor: 804, maior: 1592103, pct: 7.9 },
+      { local: 'Sudeste', pop: 77873342, qtd: 1668, media: 46713, menor: 804, maior: 10886518, pct: 42.3 },
+      { local: 'Sul', pop: 26733877, qtd: 1186, media: 22541, menor: 804, maior: 1751907, pct: 14.5 }
+    ];
+
+    function renderBarChart(containerId, data, maxVal, formatFn) {
+      const el = document.getElementById(containerId);
+      if (!el) return;
+      el.innerHTML = data.map(d => `
+        <div class="bar-row">
+          <span class="bar-label">${d.nome}</span>
+          <div class="bar-container">
+            <div class="bar-fill" style="width:${(d.pop/maxVal)*100}%"></div>
+            <span class="bar-value">${formatFn(d.pop)}</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function formatNum(n) {
+      return n.toLocaleString('pt-BR');
+    }
+
+    function showPage(page) {
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector(`.nav-btn[onclick="showPage('${page}')"]`).classList.add('active');
+      document.getElementById('page-geral').style.display = page === 'geral' ? 'block' : 'none';
+      document.getElementById('page-detalhes').style.display = page === 'detalhes' ? 'block' : 'none';
+    }
+
+    // Render
+    renderBarChart('chart-regiao', regioes, maxRegiao, formatNum);
+    renderBarChart('chart-estado', estados, maxEstado, formatNum);
+    renderBarChart('chart-municipio', municipios, municipios[0].pop, formatNum);
+
+    document.getElementById('table-regiao').innerHTML = tabelaRegiao.map(r => `
+      <tr>
+        <td>${r.local}</td>
+        <td>${formatNum(r.pop)}</td>
+        <td>${formatNum(r.qtd)}</td>
+        <td>${formatNum(r.media)}</td>
+        <td>${formatNum(r.menor)}</td>
+        <td>${formatNum(r.maior)}</td>
+        <td>${r.pct.toFixed(1).replace('.', ',')}%</td>
+      </tr>
+    `).join('') + `
+      <tr class="total-row">
+        <td>Total</td>
+        <td>183.989.711</td>
+        <td>5.564</td>
+        <td>33.068</td>
+        <td>804</td>
+        <td>10.886.518</td>
+        <td>100,0%</td>
+      </tr>
+    `;
+
+    let rank = 5564;
+    document.getElementById('table-municipio').innerHTML = [
+      { nome: 'Borá', pop: 804 }, { nome: 'Serra da Saudade', pop: 812 },
+      { nome: 'Anhanguera', pop: 1022 }, { nome: 'Araguainha', pop: 1096 },
+      { nome: 'Rio da Conceição', pop: 1714 }
+    ].map(m => {
+      const r = rank--;
+      return `<tr><td>${m.nome}</td><td>${formatNum(r)}</td><td>${formatNum(m.pop)}</td></tr>`;
+    }).join('');
+  </script>
+</body>
+</html>

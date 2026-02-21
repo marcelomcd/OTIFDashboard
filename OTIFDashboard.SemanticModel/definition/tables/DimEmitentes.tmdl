@@ -1,0 +1,31 @@
+/// Dimensão Emitentes
+table DimEmitentes
+	lineageTag: 06c74707-0afc-45f4-aadc-a5a598cb58d4
+
+	column 'Cod.Emitente'
+		dataType: int64
+		formatString: 0
+		lineageTag: f2bc469d-6945-4c31-b6e7-8bd996e8d5b5
+		summarizeBy: sum
+		sourceColumn: Cod.Emitente
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nome Abrev'
+		dataType: string
+		lineageTag: 7c5a33df-ab58-4ee9-98d9-5049122056d1
+		summarizeBy: none
+		sourceColumn: Nome Abrev
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimEmitentes = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents("C:\Users\marce\Desktop\OTIFDashboard\otif-emitentes-20022026-101911.csv"),[Delimiter=";", Columns=2, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Cod.Emitente", Int64.Type}, {"Nome Abrev", type text}})
+				in
+				    #"Tipo Alterado"
+

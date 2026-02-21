@@ -1,0 +1,60 @@
+/// Dados mockados do Censo Brasil 2007
+table CensoDados
+	lineageTag: censo-dados-2007
+
+	column Regiao
+		lineageTag: 7c655ee0-48c8-4668-9151-1dcc7440ba23
+		isNameInferred
+		sourceColumn: [Regiao]
+
+	column UF
+		lineageTag: 81d6fb57-15d9-4505-b135-cfedfdb560eb
+		isNameInferred
+		sourceColumn: [UF]
+
+	column Municipio
+		lineageTag: 0e7257c2-9764-4c4f-b598-04e9dc110f1c
+		isNameInferred
+		sourceColumn: [Municipio]
+
+	column Populacao
+		lineageTag: 419b18ce-b864-4a21-8ad9-d45895ea0540
+		isNameInferred
+		sourceColumn: [Populacao]
+
+	partition Partition = calculated
+		mode: import
+		source =
+				DATATABLE(
+					"Regiao", STRING,
+					"UF", STRING,
+					"Municipio", STRING,
+					"Populacao", INTEGER,
+					{
+						{"Sudeste","SP","São Paulo",10886518},
+						{"Sudeste","RJ","Rio de Janeiro",6093472},
+						{"Nordeste","BA","Salvador",2886698},
+						{"Centro-Oeste","DF","Brasília",2455903},
+						{"Nordeste","CE","Fortaleza",2452185},
+						{"Sudeste","MG","Belo Horizonte",2373224},
+						{"Sul","PR","Curitiba",1751907},
+						{"Norte","AM","Manaus",1592103},
+						{"Nordeste","PE","Recife",1537704},
+						{"Nordeste","PE","Olinda",397266},
+						{"Sul","RS","Porto Alegre",1409351},
+						{"Nordeste","BA","Feira de Santana",556642},
+						{"Sudeste","SP","Guarulhos",1221979},
+						{"Sudeste","SP","Campinas",1080113},
+						{"Nordeste","RN","Natal",803739},
+						{"Sudeste","ES","Vitória",317817},
+						{"Norte","PA","Belém",1393399},
+						{"Centro-Oeste","GO","Goiânia",1302001},
+						{"Nordeste","PB","João Pessoa",723515},
+						{"Sul","SC","Florianópolis",421240},
+						{"Norte","AM","Borá",804},
+						{"Sudeste","SP","Serra da Saudade",812},
+						{"Centro-Oeste","GO","Anhanguera",1022},
+						{"Centro-Oeste","MT","Araguainha",1096}
+					}
+				)
+

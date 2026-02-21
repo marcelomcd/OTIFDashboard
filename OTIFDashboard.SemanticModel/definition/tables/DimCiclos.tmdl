@@ -1,0 +1,30 @@
+/// Dimensão de ciclos para visualizações
+table DimCiclos
+	lineageTag: 976e6a66-4820-4013-b8f1-05f2c0d3732c
+
+	column Ciclo
+		lineageTag: d5414e18-a1e5-4350-b81d-84bdc7be22a4
+		isNameInferred
+		sourceColumn: [Ciclo]
+
+	column Ordem
+		lineageTag: aa0cc88d-2288-4e29-b0cf-87b6e5abc28f
+		isNameInferred
+		sourceColumn: [Ordem]
+
+	partition Partition = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "Ciclo", STRING,
+				    "Ordem", INTEGER,
+				    {
+				        {"Comercial", 1},
+				        {"Financeiro", 2},
+				        {"Estoque", 3},
+				        {"Faturamento", 4},
+				        {"Expedição", 5},
+				        {"Transporte", 6}
+				    }
+				)
+

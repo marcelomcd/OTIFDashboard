@@ -1,0 +1,29 @@
+/// Dimensão Canal de Venda - lookup do código do canal
+table DimCanalVenda
+	lineageTag: 263ea50e-8e9f-495c-8a73-118622f70313
+
+	column Descricao
+		dataType: string
+		lineageTag: d2170354-1e09-405c-a1d1-334c5abbf183
+		summarizeBy: none
+		sourceColumn: Descricao
+
+	column 'Cod.Canal'
+		dataType: int64
+		formatString: 0
+		lineageTag: 8241147f-ee4b-43e5-81e2-b8b7ddfb77cf
+		summarizeBy: sum
+		sourceColumn: Cod.Canal
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimCanalVenda = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents("C:\Users\marce\Desktop\OTIFDashboard\otif-canal-venda-20022026-101911.csv"),[Delimiter=";", Columns=2, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Cod.Canal", Int64.Type}, {"Descricao", type text}})
+				in
+				    #"Tipo Alterado"
+

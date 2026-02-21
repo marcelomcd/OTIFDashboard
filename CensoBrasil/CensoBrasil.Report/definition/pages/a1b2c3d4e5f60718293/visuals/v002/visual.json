@@ -1,0 +1,89 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "v002",
+  "position": {
+    "x": 480,
+    "y": 32,
+    "z": 2,
+    "height": 32,
+    "width": 140,
+    "tabOrder": 2
+  },
+  "visual": {
+    "visualType": "slicer",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "CensoDados"
+                    }
+                  },
+                  "Property": "Regiao"
+                }
+              },
+              "queryRef": "CensoDados.Regiao",
+              "nativeQueryRef": "Regiao",
+              "active": true
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "CensoDados"
+                  }
+                },
+                "Property": "Regiao"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "data": [
+        {
+          "properties": {
+            "mode": {
+              "expr": {
+                "Literal": {
+                  "Value": "'List'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "b95e6e3580d6e2d51b48",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "CensoDados"
+              }
+            },
+            "Property": "Regiao"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

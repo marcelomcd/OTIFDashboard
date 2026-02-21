@@ -1,0 +1,266 @@
+/// Tabela para organizar medidas DAX
+table _Medidas
+	isHidden
+	lineageTag: fd992d5e-093c-4e23-935f-d8868e8c5748
+
+	/// Total de pedidos no período selecionado
+	measure 'Total Pedidos' = COUNTROWS(Pedidos_OTIF)
+		formatString: #,##0
+		displayFolder: 1. Métricas Base
+		lineageTag: c261d126-5bed-46e0-9486-fb5fd3e5dd66
+
+	/// Quantidade de pedidos entregues no prazo acordado
+	measure 'Pedidos On Time' =
+			CALCULATE(
+			    COUNTROWS(Pedidos_OTIF),
+			    Pedidos_OTIF[Order On Time] = "yes"
+			)
+		formatString: #,##0
+		displayFolder: 1. Métricas Base
+		lineageTag: e3c8b7bc-0961-4101-9a3a-172b28d1a22d
+
+	/// Quantidade de pedidos entregues de forma completa
+	measure 'Pedidos In Full' =
+			CALCULATE(
+			    COUNTROWS(Pedidos_OTIF),
+			    Pedidos_OTIF[Order In Full] = "yes"
+			)
+		formatString: #,##0
+		displayFolder: 1. Métricas Base
+		lineageTag: 73cd8db6-c4d4-4b56-bd25-b468b35ca83d
+
+	/// Pedidos On Time In Full
+	measure 'Pedidos OTIF' =
+			CALCULATE(
+			    COUNTROWS(Pedidos_OTIF),
+			    Pedidos_OTIF[Order OTIF] = "yes"
+			)
+		formatString: #,##0
+		displayFolder: 1. Métricas Base
+		lineageTag: 1b40b399-1b8a-4d20-9ded-a9038ba419fb
+
+	/// Percentual OTIF - Indicador principal
+	measure '% OTIF Geral' =
+			VAR TotalPedidos = [Total Pedidos]
+			VAR PedidosOTIF = [Pedidos OTIF]
+			RETURN
+			    IF(
+			        TotalPedidos > 0,
+			        DIVIDE(PedidosOTIF, TotalPedidos, 0),
+			        BLANK()
+			    )
+		formatString: 0.0%
+		displayFolder: 2. Indicadores
+		lineageTag: b1ccee5a-4834-4219-8846-8c6303535c4a
+
+	/// Percentual de entregas no prazo
+	measure '% On Time' = DIVIDE([Pedidos On Time], [Total Pedidos], 0)
+		formatString: 0.0%
+		displayFolder: 2. Indicadores
+		lineageTag: 5b47004b-7eef-487d-8cf0-d76c5d577d2f
+
+	/// Percentual de entregas completas
+	measure '% In Full' = DIVIDE([Pedidos In Full], [Total Pedidos], 0)
+		formatString: 0.0%
+		displayFolder: 2. Indicadores
+		lineageTag: 9d1f3562-efba-452a-8101-2fd592f854ec
+
+	/// Atrasos no ciclo comercial
+	measure 'Atraso Comercial' =
+			CALCULATE(
+			    COUNTROWS(Pedidos_OTIF),
+			    Pedidos_OTIF[Comerc OK?] = "no"
+			)
+		formatString: #,##0
+		displayFolder: 3. Ciclos de Atraso
+		lineageTag: 0a972776-2ec7-4770-a598-bba772221420
+
+	/// Atrasos no ciclo financeiro
+	measure 'Atraso Financeiro' =
+			CALCULATE(
+			    COUNTROWS(Pedidos_OTIF),
+			    Pedidos_OTIF[Financ OK?] = "no"
+			)
+		formatString: #,##0
+		displayFolder: 3. Ciclos de Atraso
+		lineageTag: 3b6af7d9-e19b-4ddd-be77-45045b3cfaa0
+
+	/// Atrasos no ciclo de estoque
+	measure 'Atraso Estoque' =
+			CALCULATE(
+			    COUNTROWS(Pedidos_OTIF),
+			    Pedidos_OTIF[Estoque OK?] = "no"
+			)
+		formatString: #,##0
+		displayFolder: 3. Ciclos de Atraso
+		lineageTag: a2fbfba2-ee18-44d9-988b-6a795292c389
+
+	/// Atrasos no faturamento
+	measure 'Atraso Faturamento' =
+			CALCULATE(
+			    COUNTROWS(Pedidos_OTIF),
+			    Pedidos_OTIF[Faturamento OK?] = "no"
+			)
+		formatString: #,##0
+		displayFolder: 3. Ciclos de Atraso
+		lineageTag: 8c889a8e-00dd-401b-b841-748b0dc6e9cb
+
+	/// Atrasos na expedição
+	measure 'Atraso Expedição' =
+			CALCULATE(
+			    COUNTROWS(Pedidos_OTIF),
+			    Pedidos_OTIF[Expedicao OK?] = "no"
+			)
+		formatString: #,##0
+		displayFolder: 3. Ciclos de Atraso
+		lineageTag: db56be0f-9bdc-4e6b-8bbd-af90cff7d47b
+
+	/// Atrasos no transporte
+	measure 'Atraso Transporte' =
+			CALCULATE(
+			    COUNTROWS(Pedidos_OTIF),
+			    Pedidos_OTIF[Transp OK?] = "no"
+			)
+		formatString: #,##0
+		displayFolder: 3. Ciclos de Atraso
+		lineageTag: 636d932b-8044-4aa9-bf09-0ca65492a34e
+
+	/// Total de atrasos em todos os ciclos
+	measure 'Total Atrasos' = [Atraso Comercial] + [Atraso Financeiro] + [Atraso Estoque] + [Atraso Faturamento] + [Atraso Expedição] + [Atraso Transporte]
+		formatString: #,##0
+		displayFolder: 3. Ciclos de Atraso
+		lineageTag: aabb1616-e39e-47ac-a2f7-22c44dee06e4
+
+	/// Participação dos atrasos comerciais
+	measure '% Atraso Comercial' = DIVIDE([Atraso Comercial], [Total Atrasos], 0)
+		formatString: 0%
+		displayFolder: 4. Análise de Causas
+		lineageTag: bc20da57-eebe-4c6b-8b9e-f25279471f7c
+
+	/// Participação dos atrasos financeiros
+	measure '% Atraso Financeiro' = DIVIDE([Atraso Financeiro], [Total Atrasos], 0)
+		formatString: 0%
+		displayFolder: 4. Análise de Causas
+		lineageTag: 4a85c5a5-60cd-4e42-b601-0ed4f9937459
+
+	/// Participação dos atrasos de estoque
+	measure '% Atraso Estoque' = DIVIDE([Atraso Estoque], [Total Atrasos], 0)
+		formatString: 0%
+		displayFolder: 4. Análise de Causas
+		lineageTag: 8dc2f196-ebea-43f6-a4ff-f92eebf16201
+
+	/// Participação dos atrasos de faturamento
+	measure '% Atraso Faturamento' = DIVIDE([Atraso Faturamento], [Total Atrasos], 0)
+		formatString: 0%
+		displayFolder: 4. Análise de Causas
+		lineageTag: 8b9d08b1-e478-46c2-9d25-895822837f38
+
+	/// Participação dos atrasos de expedição
+	measure '% Atraso Expedição' = DIVIDE([Atraso Expedição], [Total Atrasos], 0)
+		formatString: 0%
+		displayFolder: 4. Análise de Causas
+		lineageTag: 24ddd61e-ba52-45ce-904d-790defc47b9a
+
+	/// Participação dos atrasos de transporte
+	measure '% Atraso Transporte' = DIVIDE([Atraso Transporte], [Total Atrasos], 0)
+		formatString: 0%
+		displayFolder: 4. Análise de Causas
+		lineageTag: d8e5017b-9adb-474b-a4c0-eb988d2386ce
+
+	/// Meta de OTIF estabelecida (95%)
+	measure 'Meta OTIF' = 0.95
+		formatString: 0%
+		displayFolder: 5. Metas
+		lineageTag: fee84828-ae4d-4a81-a9c1-520affd66ab7
+
+	/// Diferença entre OTIF real e meta
+	measure 'Desvio da Meta' = [% OTIF Geral] - [Meta OTIF]
+		formatString: +0.0%;-0.0%;0.0%
+		displayFolder: 5. Metas
+		lineageTag: 3d60e493-36d2-4003-8990-90a1b3a3e246
+
+	/// Status visual em relação à meta
+	measure 'Status Meta' =
+			VAR Desvio = [Desvio da Meta]
+			RETURN
+			    SWITCH(
+			        TRUE(),
+			        Desvio >= 0, "✅ Acima da Meta",
+			        Desvio >= -0.03, "⚠️ Próximo da Meta",
+			        "❌ Abaixo da Meta"
+			    )
+		displayFolder: 5. Metas
+		lineageTag: 17671bf9-a163-4733-89da-ae1032160d11
+
+	/// Medida dinâmica que retorna o valor do ciclo selecionado
+	measure 'Valor por Ciclo' =
+			SWITCH(
+			    SELECTEDVALUE(DimCiclos[Ciclo]),
+			    "Comercial", [Atraso Comercial],
+			    "Financeiro", [Atraso Financeiro],
+			    "Estoque", [Atraso Estoque],
+			    "Faturamento", [Atraso Faturamento],
+			    "Expedição", [Atraso Expedição],
+			    "Transporte", [Atraso Transporte],
+			    BLANK()
+			)
+		formatString: #,##0
+		displayFolder: 6. Medidas para Visualizações
+		lineageTag: f4541bb3-86b1-4374-9fce-14db70b43fa9
+
+	/// Percentual do ciclo selecionado em relação ao total
+	measure '% por Ciclo' =
+			SWITCH(
+			    SELECTEDVALUE(DimCiclos[Ciclo]),
+			    "Comercial", [% Atraso Comercial],
+			    "Financeiro", [% Atraso Financeiro],
+			    "Estoque", [% Atraso Estoque],
+			    "Faturamento", [% Atraso Faturamento],
+			    "Expedição", [% Atraso Expedição],
+			    "Transporte", [% Atraso Transporte],
+			    BLANK()
+			)
+		formatString: 0%
+		displayFolder: 6. Medidas para Visualizações
+		lineageTag: 0dd367e2-1635-44b0-8f13-b368cc18d8da
+
+	measure 'Rank OTIF Cliente' =
+			RANKX(
+			    ALL(Pedidos_OTIF[Cliente]),
+			    [% OTIF Geral],
+			    ,
+			    DESC
+			)
+		formatString: 0
+		displayFolder: 6. Medidas para Visualizações
+		lineageTag: c5427b62-aed5-49d7-bdc6-e2db8ef2dacb
+
+	measure 'É Bottom 5 Cliente' =
+			VAR TotalClientes = COUNTROWS(ALL(Pedidos_OTIF[Cliente]))
+			VAR MyRank = [Rank OTIF Cliente]
+			RETURN IF(MyRank >= TotalClientes - 4 && MyRank <= TotalClientes, 1, 0)
+		formatString: 0
+		displayFolder: 6. Medidas para Visualizações
+		lineageTag: 49bceaba-b0e5-4620-9e81-077dc59eb502
+
+	/// Total de itens/linas nos pedidos
+	measure 'Total Itens' = COUNTROWS(Itens_OTIF)
+		formatString: #,##0
+		displayFolder: 7. Itens e Produtos
+		lineageTag: 084305c1-fe93-4f15-8a3a-e0da8f9aed98
+
+	/// Média de itens por pedido
+	measure 'Média Itens por Pedido' = DIVIDE([Total Itens], [Total Pedidos], 0)
+		formatString: #,##0.0
+		displayFolder: 7. Itens e Produtos
+		lineageTag: d072d5cd-827f-42f2-95e4-5d451d8866ac
+
+	column Medidas
+		lineageTag: ceff79cf-ba31-4a75-8299-b121af45d9b4
+		isNameInferred
+		sourceColumn: [Medidas]
+
+	partition Partition = calculated
+		mode: import
+		source = ROW("Medidas", 1)
+

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "c22836ed7d61b767b4b9",
+  "position": {
+    "x": 29.625935162094763,
+    "y": 35.910224438902745,
+    "z": 56000,
+    "height": 37.705735660847878,
+    "width": 175.96009975062344,
+    "tabOrder": 56000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Período",
+                    "textStyle": {
+                      "fontFamily": "Comic Sans MS",
+                      "fontSize": "12pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

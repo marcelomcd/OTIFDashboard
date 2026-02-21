@@ -1,0 +1,400 @@
+table Pedidos_OTIF
+	lineageTag: 418e0eec-4ae5-4ad0-a420-ecb7cd9083d1
+
+	column Estab
+		dataType: int64
+		formatString: 0
+		lineageTag: b3eabcae-f7fc-4a81-9578-939b80a4c277
+		summarizeBy: sum
+		sourceColumn: Estab
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nota Fiscal'
+		dataType: int64
+		formatString: 0
+		lineageTag: 69aaee5c-4b4d-4e33-addf-d446d539cb49
+		summarizeBy: sum
+		sourceColumn: Nota Fiscal
+
+		annotation SummarizationSetBy = Automatic
+
+	column Pedido
+		dataType: string
+		lineageTag: 9dfd1529-f48b-4a02-96ec-f0606c58c809
+		summarizeBy: none
+		sourceColumn: Pedido
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cliente
+		dataType: string
+		lineageTag: 17f52407-1d0a-4b93-b67f-cfda15290f1b
+		summarizeBy: none
+		sourceColumn: Cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Dt.EmissÆo'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 0b550fe5-9843-43aa-a534-d0a9d3ea7b0d
+		summarizeBy: none
+		sourceColumn: Dt.EmissÆo
+
+		variation Variation
+			isDefault
+			relationship: 85be3b10-eadc-4911-8b13-442e4cd2447b
+			defaultHierarchy: LocalDateTable_808954f5-74b3-4a47-8390-cd46a16ab124.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'User Implant'
+		dataType: string
+		lineageTag: e133dfee-6162-4e93-98d9-c8449ef4d3eb
+		summarizeBy: none
+		sourceColumn: User Implant
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Prazo Comercial'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 0a646511-dc3c-409f-ac69-85476b3b5f24
+		summarizeBy: none
+		sourceColumn: Prazo Comercial
+
+		variation Variation
+			isDefault
+			relationship: 57930ad0-9270-4994-b1ed-49a434643fc7
+			defaultHierarchy: LocalDateTable_a4c25065-428d-4fc4-b187-68790e8b5d91.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Comerc OK?'
+		dataType: string
+		lineageTag: 24fcd5cd-78d2-4634-b055-0cda4594cd76
+		summarizeBy: none
+		sourceColumn: Comerc OK?
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Dt.Real Comercial'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 4ca71276-cac6-4dab-b5f1-374fd085bb48
+		summarizeBy: none
+		sourceColumn: Dt.Real Comercial
+
+		variation Variation
+			isDefault
+			relationship: 23d74311-edb0-4297-acd5-39b747716369
+			defaultHierarchy: LocalDateTable_7a2b4802-5946-43f6-91bd-12cecc8c5710.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Prazo Financeiro'
+		dataType: string
+		lineageTag: d6617917-85e0-4e36-a5b3-93da3baa35b8
+		summarizeBy: none
+		sourceColumn: Prazo Financeiro
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Financ OK?'
+		dataType: string
+		lineageTag: f7f6d36d-1cc4-4702-ab1d-d016785cb062
+		summarizeBy: none
+		sourceColumn: Financ OK?
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Dt.Real Financeiro'
+		dataType: string
+		lineageTag: 974ca407-29fc-46f3-b623-d9eafb4fee60
+		summarizeBy: none
+		sourceColumn: Dt.Real Financeiro
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'User Financeiro'
+		dataType: string
+		lineageTag: b5e8c2a0-5066-4afb-b3ac-d1d312171624
+		summarizeBy: none
+		sourceColumn: User Financeiro
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Prazo Estoque'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 95c2f162-9419-4bc7-848d-f3add2849e21
+		summarizeBy: none
+		sourceColumn: Prazo Estoque
+
+		variation Variation
+			isDefault
+			relationship: 240668d4-dd33-46a3-afca-b5dd5ae4caa2
+			defaultHierarchy: LocalDateTable_f2cbd382-18d0-4ffb-bc0a-70ac0ba56a25.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Estoque OK?'
+		dataType: string
+		lineageTag: 66f53406-9d94-4d32-8023-4d3882167705
+		summarizeBy: none
+		sourceColumn: Estoque OK?
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Dt.Real Estoque'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b19142c1-8d2d-4923-a74c-7e37cc455601
+		summarizeBy: none
+		sourceColumn: Dt.Real Estoque
+
+		variation Variation
+			isDefault
+			relationship: 66f1dc69-24a5-4a37-bbee-4fb34571f126
+			defaultHierarchy: LocalDateTable_b81ad765-844a-4951-bc33-7bee8476d5cf.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'User Estoque'
+		dataType: string
+		lineageTag: 91fdb0fb-4866-4d21-8ed0-53a684b9525d
+		summarizeBy: none
+		sourceColumn: User Estoque
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Aloc Total'
+		dataType: string
+		lineageTag: 20f53db5-4577-460b-812b-9aee38c17584
+		summarizeBy: none
+		sourceColumn: Aloc Total
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Prazo Faturamento'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: eea96fa0-9d99-4235-b6c1-36e98b748af4
+		summarizeBy: none
+		sourceColumn: Prazo Faturamento
+
+		variation Variation
+			isDefault
+			relationship: 37f1a8e7-4f9d-4e0b-b36c-1b7ed263308a
+			defaultHierarchy: LocalDateTable_24960842-c35f-4f13-bf85-3d8869d77aff.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Faturamento OK?'
+		dataType: string
+		lineageTag: e72e09f6-941a-47b0-b090-638e356f02a8
+		summarizeBy: none
+		sourceColumn: Faturamento OK?
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Dt.Fatur Emis Nota'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 23ffbaf5-c83f-488c-a5e8-759cd13de80c
+		summarizeBy: none
+		sourceColumn: Dt.Fatur Emis Nota
+
+		variation Variation
+			isDefault
+			relationship: 256a3314-0f4a-4c93-af66-e7d9a82fbbab
+			defaultHierarchy: LocalDateTable_17fbf319-5b46-4ab5-b911-f34244d185fe.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'User Cal Nota'
+		dataType: string
+		lineageTag: 5840ba36-070a-4291-b4e3-7dd2c410c161
+		summarizeBy: none
+		sourceColumn: User Cal Nota
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Prazo Expedicao'
+		dataType: string
+		lineageTag: bfaa6584-2f02-462a-b724-a290a2e40c5d
+		summarizeBy: none
+		sourceColumn: Prazo Expedicao
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Expedicao OK?'
+		dataType: string
+		lineageTag: 84828a2e-3b8f-441b-9236-39554f213f53
+		summarizeBy: none
+		sourceColumn: Expedicao OK?
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Data Exp Saida'
+		dataType: string
+		lineageTag: 177d27cf-6399-4f03-9486-5026b58d77bf
+		summarizeBy: none
+		sourceColumn: Data Exp Saida
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Prazo Transporte'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 86d751ad-77ae-49ed-a366-1a5d9f2f57a3
+		summarizeBy: none
+		sourceColumn: Prazo Transporte
+
+		variation Variation
+			isDefault
+			relationship: 92b2c444-dc3f-4da6-8bd4-6bc8b61e99af
+			defaultHierarchy: LocalDateTable_8f4e7dbe-bb79-4064-9bb0-463e8ab97351.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Dt Prev Entrega'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 16ed4a9a-ea8c-42a9-b553-6d0b27148f0c
+		summarizeBy: none
+		sourceColumn: Dt Prev Entrega
+
+		variation Variation
+			isDefault
+			relationship: 941f7c63-374b-4068-a2b3-22734b169bcb
+			defaultHierarchy: LocalDateTable_7d06e464-8699-41f4-bf41-a776db2da4f2.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Dt Entr Cli'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 6fdd56b0-60b4-4e29-9d00-9c7c71dd7755
+		summarizeBy: none
+		sourceColumn: Dt Entr Cli
+
+		variation Variation
+			isDefault
+			relationship: 944bf48f-af2d-4f07-be6b-01bd74be5a97
+			defaultHierarchy: LocalDateTable_8c6aa999-01a2-4b86-b526-d32b7b69b4b1.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Transp OK?'
+		dataType: string
+		lineageTag: 367c5e3a-1c59-4f0d-9bcf-2552679555a7
+		summarizeBy: none
+		sourceColumn: Transp OK?
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order On Time'
+		dataType: string
+		lineageTag: aded7280-b099-4a18-8951-1ff8e8fdf0fd
+		summarizeBy: none
+		sourceColumn: Order On Time
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order In Full'
+		dataType: string
+		lineageTag: d7321458-58fd-4787-b35a-82f8788558c7
+		summarizeBy: none
+		sourceColumn: Order In Full
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order OTIF'
+		dataType: string
+		lineageTag: 9ae4d6c2-8a40-4e11-bd13-b970cd326e19
+		summarizeBy: none
+		sourceColumn: Order OTIF
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OTIF Geral'
+		dataType: string
+		lineageTag: 111aeb37-eedc-43ab-ae30-5fc752f22a4a
+		summarizeBy: none
+		sourceColumn: OTIF Geral
+
+		annotation SummarizationSetBy = Automatic
+
+	column Produto = "Todos"
+		dataType: string
+		lineageTag: b72051f3-3e84-43ec-accb-4ca77ec724dd
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Região/Unidade extraída do código do cliente
+	column Regiao =
+			VAR ClienteTexto = Pedidos_OTIF[Cliente]
+			VAR UltimosCaracteres = RIGHT(ClienteTexto, 5)
+			VAR TemHifen = SEARCH("-", UltimosCaracteres, 1, 0)
+			VAR TemEspaco = SEARCH(" ", UltimosCaracteres, 1, 0)
+			RETURN
+			IF(
+			    TemHifen > 0 || TemEspaco > 0,
+			    TRIM(UltimosCaracteres),
+			    "Sem Código"
+			)
+		dataType: string
+		displayFolder: Dimensões
+		lineageTag: 3f7085b4-0dc0-46e5-be5e-456a600ac436
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Código do canal de venda
+	column Canal
+		dataType: int64
+		lineageTag: 87d797eb-6278-4901-b9cf-5fc2ab4b7519
+		summarizeBy: sum
+		sourceColumn: Canal
+
+		annotation SummarizationSetBy = Automatic
+
+	partition otif-pedidos-02022026-104818 = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents("C:\Users\marce\Desktop\OTIFDashboard\otif-pedidos-20022026-101911.csv"),[Delimiter=";", Columns=35, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				    #"Colunas Removidas" = Table.RemoveColumns(#"Cabeçalhos Promovidos",{"Aloc Parcial"}),
+				    #"Colunas Renomeadas" = Table.TransformColumnNames(#"Colunas Removidas", each if Text.StartsWith(_, "Dt.") and Text.Contains(_, "Emiss") then "Dt.EmissÆo" else _),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Colunas Renomeadas",{{"Canal", Int64.Type}, {"Estab", Int64.Type}, {"Nota Fiscal", Int64.Type}, {"Pedido", type text}, {"Cliente", type text}, {"Dt.EmissÆo", type date}, {"User Implant", type text}, {"Prazo Comercial", type date}, {"Comerc OK?", type text}, {"Dt.Real Comercial", type date}, {"Prazo Financeiro", type text}, {"Financ OK?", type text}, {"Dt.Real Financeiro", type text}, {"User Financeiro", type text}, {"Prazo Estoque", type date}, {"Estoque OK?", type text}, {"Dt.Real Estoque", type date}, {"User Estoque", type text}, {"Aloc Total", type text}, {"Prazo Faturamento", type date}, {"Faturamento OK?", type text}, {"Dt.Fatur Emis Nota", type date}, {"User Cal Nota", type text}, {"Prazo Expedicao", type text}, {"Expedicao OK?", type text}, {"Data Exp Saida", type text}, {"Prazo Transporte", type date}, {"Dt Prev Entrega", type date}, {"Dt Entr Cli", type date}, {"Transp OK?", type text}, {"Order On Time", type text}, {"Order In Full", type text}, {"Order OTIF", type text}, {"OTIF Geral", type text}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

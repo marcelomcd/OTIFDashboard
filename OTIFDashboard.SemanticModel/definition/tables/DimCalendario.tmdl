@@ -1,0 +1,77 @@
+/// Dimensão de calendário para análises temporais
+table DimCalendario
+	lineageTag: a543e660-bf56-4b91-bc09-458c4157df18
+
+	column Date
+		lineageTag: cd922039-3401-4504-a7df-1001692c7c74
+		isNameInferred
+		sourceColumn: [Date]
+
+	column Ano
+		lineageTag: a5b63217-5608-4f6e-9c8a-9831ab143892
+		isNameInferred
+		sourceColumn: [Ano]
+
+	column Mes
+		lineageTag: 67cf0ee2-1cd3-46f4-af3c-ad0eb0e87832
+		isNameInferred
+		sourceColumn: [Mes]
+
+	column MesNome
+		lineageTag: 39254cc2-5205-4f2c-b1d4-d2d98a2b4b37
+		isNameInferred
+		sourceColumn: [MesNome]
+
+	column AnoMes
+		lineageTag: fe9f3cda-0f09-4707-8c67-e9cee86bbb5a
+		isNameInferred
+		sourceColumn: [AnoMes]
+
+	column Trimestre
+		lineageTag: 3215b47d-7ec8-4081-bcd7-6ad71e63c80c
+		isNameInferred
+		sourceColumn: [Trimestre]
+
+	column DiaMes
+		lineageTag: a0d6d27d-2adb-4282-b273-d8a5a7ea0217
+		isNameInferred
+		sourceColumn: [DiaMes]
+
+	column DiaSemana
+		lineageTag: 1101f802-c139-41b6-8b97-1f6472ecbc2e
+		isNameInferred
+		sourceColumn: [DiaSemana]
+
+	column NomeDiaSemana
+		lineageTag: 1efc0a21-2b24-4b2e-87af-4e6d45118b7d
+		isNameInferred
+		sourceColumn: [NomeDiaSemana]
+
+	column AnoMesNum
+		lineageTag: 4a1a1ee6-ed46-453c-aa5f-ff7e3d007c60
+		isNameInferred
+		sourceColumn: [AnoMesNum]
+
+	column MesExtenso
+		lineageTag: a1b2c3d4-5678-90ab-cdef-111213141516
+		isNameInferred
+		sourceColumn: [MesExtenso]
+		sortByColumn: Mes
+
+	partition Partition = calculated
+		mode: import
+		source =
+				ADDCOLUMNS(
+				    CALENDAR(DATE(2024,1,1), DATE(2026,12,31)),
+				    "Ano", YEAR([Date]),
+				    "Mes", MONTH([Date]),
+				    "MesNome", FORMAT([Date], "MMM"),
+				    "MesExtenso", SWITCH(MONTH([Date]), 1, "Janeiro", 2, "Fevereiro", 3, "Março", 4, "Abril", 5, "Maio", 6, "Junho", 7, "Julho", 8, "Agosto", 9, "Setembro", 10, "Outubro", 11, "Novembro", 12, "Dezembro", ""),
+				    "AnoMes", FORMAT([Date], "MMM/YY"),
+				    "Trimestre", "T" & ROUNDUP(MONTH([Date])/3,0),
+				    "DiaMes", DAY([Date]),
+				    "DiaSemana", WEEKDAY([Date]),
+				    "NomeDiaSemana", FORMAT([Date], "DDD"),
+				    "AnoMesNum", YEAR([Date]) * 100 + MONTH([Date])
+				)
+

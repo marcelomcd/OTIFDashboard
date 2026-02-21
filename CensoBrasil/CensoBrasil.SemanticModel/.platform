@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "CensoBrasil"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "31ff98e5-ae31-4081-bf84-54a3acaad5fb"
+  }
+}
